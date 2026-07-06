@@ -3,532 +3,527 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="جاسر اشلاف - مطور ويب يجمع بين منطق البرمجة وجماليات الفن">
-    <title>جاسر اشلاف | الفن في خدمة الأكواد</title>
+    <meta name="description" content="بورتفوليو جاسر اشلاف الخارق - الفن يلتقي بالذكاء الاصطناعي">
+    <title>جاسر اشلاف | الخوارزمية الفنية</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-dark: #060608;
-            --accent-glow: #38bdf8;
+            --bg-dark: #050508;
+            --accent-neon: #38bdf8;
             --accent-purple: #818cf8;
-            --glass-bg: rgba(15, 15, 20, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.04);
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
+            --accent-pink: #f43f5e;
+            --glass-bg: rgba(10, 10, 15, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --text-main: #f8fafc;
+            --text-muted: #64748b;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Tajawal', system-ui, -apple-system, sans-serif;
-            /* إلغاء المؤشر الافتراضي لتفعيل المؤشر المخصص */
-            cursor: none !important; 
+            font-family: 'Tajawal', sans-serif;
+            cursor: none !important; /* مؤشر مخصص خارق */
         }
 
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
             overflow-x: hidden;
-            position: relative;
+            min-height: 100vh;
         }
 
-        /* مؤشر الفأرة التفاعلي النيون */
-        .custom-cursor {
-            width: 8px;
-            height: 8px;
-            background: var(--accent-glow);
-            border-radius: 50%;
-            position: fixed;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 10000;
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        /* المؤشر النيون المطور */
+        .cyber-cursor {
+            width: 6px; height: 6px; background: var(--accent-neon);
+            border-radius: 50%; position: fixed; transform: translate(-50%, -50%);
+            pointer-events: none; z-index: 10000; transition: width 0.2s, height 0.2s;
+            box-shadow: 0 0 10px var(--accent-neon);
         }
-        .custom-cursor-blur {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            border-radius: 50%;
-            position: fixed;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease-out, width 0.3s, height 0.3s, background-color 0.3s;
+        .cyber-cursor-ring {
+            width: 35px; height: 35px; border: 1px dashed var(--accent-purple);
+            border-radius: 50%; position: fixed; transform: translate(-50%, -50%);
+            pointer-events: none; z-index: 9999; animation: rotateRing 4s linear infinite;
+            transition: all 0.1s ease-out;
         }
 
-        /* حالات تفاعل المؤشر عند الحوم (Hover) */
-        .hover-active .custom-cursor {
-            width: 12px;
-            height: 12px;
-            background: var(--accent-purple);
-        }
-        .hover-active .custom-cursor-blur {
-            width: 60px;
-            height: 60px;
-            background: rgba(129, 140, 248, 0.1);
-            border-color: var(--accent-purple);
-        }
+        @keyframes rotateRing { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+
+        body.hover-link .cyber-cursor { width: 12px; height: 12px; background: var(--accent-pink); }
+        body.hover-link .cyber-cursor-ring { width: 50px; height: 50px; border-color: var(--accent-pink); border-style: solid; background: rgba(244, 63, 94, 0.05); }
 
         #particles-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        /* شريط التنقل السيبراني المتطور (Pages Controller) */
+        .cyber-nav {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: rgba(15, 15, 25, 0.8); backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border);
+            padding: 10px 30px; border-radius: 100px; display: flex; gap: 20px;
+            z-index: 999; box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.1);
         }
 
-        header {
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+        .nav-btn {
+            background: transparent; border: none; color: var(--text-muted);
+            padding: 10px 20px; font-size: 1.1rem; font-weight: 700;
+            border-radius: 50px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; align-items: center; gap: 10px;
         }
 
-        /* تحضير تأثير الـ 3D Tilt */
-        .tilt-element {
-            transform-style: preserve-3d;
-            transform: perspective(1000px);
-            transition: transform 0.15s ease-out, box-shadow 0.3s;
+        .nav-btn:hover, .nav-btn.active-tab {
+            color: #fff; text-shadow: 0 0 10px var(--accent-neon);
         }
 
-        .hero-box {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            padding: 60px 40px;
-            border-radius: 30px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-            max-width: 750px;
-            width: 100%;
+        .nav-btn.active-tab {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(129, 140, 248, 0.2));
+            border: 1px solid rgba(56, 189, 248, 0.3);
         }
 
-        .avatar-container {
-            position: relative;
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 30px;
-            transform: translateZ(50px); /* دفع العنصر للأمام في البعد الثالث */
+        /* حاوي الصفحات المتفاعلة */
+        .page-content {
+            display: none; opacity: 0; transform: translateY(30px) scale(0.98);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            padding-bottom: 120px;
         }
 
+        .page-content.active-page {
+            display: block; opacity: 1; transform: translateY(0) scale(1);
+        }
+
+        /* ستايل ثلاثي الأبعاد المطور للبطاقات */
+        .cyber-card {
+            background: var(--glass-bg); backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px); border: 1px solid var(--glass-border);
+            border-radius: 24px; padding: 40px; margin-top: 30px;
+            transform-style: preserve-3d; transform: perspective(1000px);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .cyber-card:hover {
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 25px 50px rgba(56, 189, 248, 0.05);
+        }
+
+        /* الصفحة الرئيسية */
+        .hero-section {
+            text-align: center; padding: 60px 20px 20px;
+        }
+        .avatar-frame {
+            position: relative; width: 140px; height: 140px; margin: 0 auto 25px;
+        }
         .avatar-glow {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(45deg, var(--accent-glow), var(--accent-purple));
-            border-radius: 50%;
-            animation: pulse 3s infinite alternate;
-            filter: blur(12px);
-            z-index: 1;
+            position: absolute; top:0; left:0; width:100%; height:100%;
+            background: linear-gradient(45deg, var(--accent-neon), var(--accent-pink));
+            border-radius: 50%; animation: pulseGlow 4s infinite alternate; filter: blur(15px);
+        }
+        .avatar-core {
+            position: absolute; top:5px; left:5px; width: 130px; height:130px;
+            background: #09090d; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 3rem; color: var(--accent-neon);
+            border: 2px solid rgba(255,255,255,0.1);
         }
 
-        .avatar {
-            position: absolute;
-            top: 4px; left: 4px;
-            width: 122px; height: 122px;
-            background: #0d0d11;
-            border-radius: 50%;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.8rem;
-            color: var(--accent-glow);
-            border: 1px solid rgba(255,255,255,0.08);
-        }
+        @keyframes pulseGlow { 0% { transform: scale(0.95); opacity: 0.5; } 100% { transform: scale(1.08); opacity: 0.9; } }
 
         h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: linear-gradient(to left, #ffffff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            transform: translateZ(40px);
+            font-size: 3.8rem; font-weight: 800; margin-bottom: 15px;
+            background: linear-gradient(to left, #fff, #94a3b8);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .typing-text {
-            font-size: 1.4rem;
-            color: var(--accent-glow);
-            font-weight: 500;
-            min-height: 35px;
-            border-left: 2px solid var(--accent-glow);
-            padding-left: 8px;
-            animation: blink 0.7s infinite;
-            display: inline-block;
-            transform: translateZ(30px);
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+        .typing-box {
+            font-size: 1.5rem; color: var(--accent-neon); font-weight: 500;
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.3); min-height: 40px;
         }
 
-        /* ستايل تأثير السكرول التدريجي */
-        .reveal-section {
-            opacity: 0;
-            transform: translateY(40px) scale(0.98);
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            padding: 45px;
-            border-radius: 24px;
-            margin-bottom: 50px;
+        /* صفحة الفن (Art Studio) */
+        .art-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 30px;
+        }
+        .art-item {
+            background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
+            border-radius: 16px; padding: 20px; text-align: center; position: relative;
+            overflow: hidden; transition: 0.3s;
+        }
+        .art-item:hover {
+            background: rgba(255,255,255,0.05); border-color: var(--accent-pink);
+        }
+        .art-canvas-simulation {
+            height: 200px; background: linear-gradient(45deg, #111, #1a1a24);
+            border-radius: 12px; margin-bottom: 15px; display: flex; align-items: center;
+            justify-content: center; position: relative;
+        }
+        /* خطوط رسم متحركة تحاكي خطوط الرصاص */
+        .pencil-line {
+            position: absolute; width: 80%; height: 2px; background: rgba(255,255,255,0.1);
+            animation: sketchDraw 3s infinite linear;
+        }
+        @keyframes sketchDraw { 0% { width: 0%; opacity: 0; } 50% { width: 80%; opacity: 0.5; } 100% { width: 100%; opacity: 0; } }
+
+        /* الترسانة التقنية (Tech Vault) */
+        .skills-matrix {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;
+        }
+        .matrix-box {
+            border: 1px solid var(--glass-border); background: rgba(129, 140, 248, 0.02);
+            padding: 25px; border-radius: 16px; position: relative; overflow: hidden;
+        }
+        .matrix-box::before {
+            content: ''; position: absolute; top:0; right:0; width: 4px; height: 100%; background: var(--accent-purple);
         }
 
-        .reveal-section.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
+        /* ================== نظام الذكاء الاصطناعي المدمج في الزاوية ================== */
+        .ai-widget {
+            position: fixed; bottom: 30px; right: 30px; z-index: 1000;
         }
-
-        .reveal-section:hover {
-            border-color: rgba(56, 189, 248, 0.25);
-            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.03);
+        .ai-trigger-btn {
+            width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent-neon), var(--accent-purple));
+            border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; color: #fff; box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
-        h2 {
-            font-size: 2.2rem;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            color: #fff;
+        .ai-trigger-btn:hover { transform: scale(1.1) rotate(15deg); }
+        
+        .ai-chat-window {
+            position: absolute; bottom: 80px; right: 0; width: 360px; height: 480px;
+            background: #0b0c12; border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            display: flex; flex-direction: column; overflow: hidden;
+            opacity: 0; transform: translateY(20px) scale(0.95); pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-
-        h2 i { color: var(--accent-glow); }
-
-        .trophy-card {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(129, 140, 248, 0.08) 100%);
-            border: 1px solid rgba(56, 189, 248, 0.15);
-            padding: 30px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            margin-top: 30px;
-            transform: translateZ(20px);
+        .ai-chat-window.open {
+            opacity: 1; transform: translateY(0) scale(1); pointer-events: all;
         }
-
-        .trophy-icon {
-            font-size: 3.5rem;
-            color: #fbbf24;
-            animation: float 3s ease-in-out infinite;
+        .ai-header {
+            background: linear-gradient(90deg, #121420, #1a1d30); padding: 15px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 12px;
         }
-
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+        .ai-status-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981; }
+        
+        .ai-messages-log {
+            flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px;
         }
-
-        .skill-item {
-            background: rgba(255,255,255,0.01);
-            border: 1px solid var(--glass-border);
-            padding: 30px;
-            border-radius: 18px;
-            transition: background 0.3s, border-color 0.3s;
+        .msg { max-width: 80%; padding: 12px 16px; border-radius: 16px; font-size: 0.95rem; line-height: 1.5; }
+        .msg.bot { background: rgba(255,255,255,0.04); color: #f1f5f9; align-self: flex-start; border-top-left-radius: 2px; }
+        .msg.user { background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(129, 140, 248, 0.2)); color: #fff; align-self: flex-end; border-top-right-radius: 2px; border: 1px solid rgba(56, 189, 248, 0.1); }
+        
+        .ai-chips-container {
+            padding: 5px 15px; display: flex; gap: 8px; overflow-x: auto; white-space: nowrap;
         }
-
-        .skill-item:hover {
-            background: rgba(255,255,255,0.04);
-            border-color: rgba(129, 140, 248, 0.3);
+        .ai-chip {
+            background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.2);
+            color: var(--accent-neon); padding: 6px 14px; border-radius: 30px; font-size: 0.85rem;
+            transition: 0.2s;
         }
+        .ai-chip:hover { background: var(--accent-neon); color: #000; font-weight: bold; }
 
-        .skill-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
+        .ai-input-area {
+            padding: 15px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; gap: 10px;
         }
-
-        .skill-header i {
-            font-size: 2rem;
-            color: var(--accent-purple);
-        }
-
-        .social-box {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
-
-        .btn-neon {
-            position: relative;
-            padding: 16px 36px;
-            border-radius: 50px;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            overflow: hidden;
-            transition: 0.3s;
-            background: #0f0f14;
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .btn-neon::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--btn-color, #fff);
-            opacity: 0.08;
+        .ai-input {
+            flex: 1; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+            border-radius: 12px; padding: 12px; color: #fff; font-size: 0.95rem; outline: none;
             transition: 0.3s;
         }
-
-        .btn-neon:hover {
-            box-shadow: 0 0 25px var(--btn-color);
-            border-color: var(--btn-color);
-            transform: scale(1.05) translateY(-3px);
+        .ai-input:focus { border-color: var(--accent-neon); background: rgba(255,255,255,0.06); }
+        .ai-send-btn {
+            width: 45px; height: 45px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
+            border-radius: 12px; color: var(--accent-neon); display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; transition: 0.2s;
         }
-
-        @keyframes pulse { 0% { transform: scale(0.96); opacity: 0.4; } 100% { transform: scale(1.06); opacity: 0.8; } }
-        @keyframes blink { 50% { border-color: transparent; } }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        .ai-send-btn:hover { background: var(--accent-neon); color: #000; }
 
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
-            .reveal-section { padding: 30px; }
-            .trophy-card { flex-direction: column; text-align: center; }
-            /* إيقاف الكاستم كورسور في الهواتف للمظهر والأداء */
-            .custom-cursor, .custom-cursor-blur { display: none; }
+            .cyber-nav { width: 90%; padding: 5px 15px; justify-content: space-between; }
+            .nav-btn { padding: 8px 12px; font-size: 0.95rem; }
+            .ai-chat-window { width: 300px; right: -10px; height: 420px; }
+            .cyber-cursor, .cyber-cursor-ring { display: none !important; }
             * { cursor: auto !important; }
         }
     </style>
 </head>
 <body>
 
-    <div class="custom-cursor" id="dot-cursor"></div>
-    <div class="custom-cursor-blur" id="blur-cursor"></div>
-
+    <!-- عناصر الواجهة التفاعلية الفائقة -->
+    <div class="cyber-cursor" id="dot-c"></div>
+    <div class="cyber-cursor-ring" id="ring-c"></div>
     <canvas id="particles-canvas"></canvas>
 
-    <main class="container">
+    <!-- شريط التنقل السفلي (المتعدد الصفحات التفاعلي) -->
+    <nav class="cyber-nav">
+        <button class="nav-btn active-tab" onclick="switchPage('home')"><i class="fa-solid fa-terminal"></i> الرئيسية</button>
+        <button class="nav-btn" onclick="switchPage('art')"><i class="fa-solid fa-palette"></i> الاستوديو الفني</button>
+        <button class="nav-btn" onclick="switchPage('tech')"><i class="fa-solid fa-layer-group"></i> الترسانة التقنية</button>
+    </nav>
+
+    <div class="container">
         
-        <header>
-            <div class="hero-box tilt-element">
-                <div class="avatar-container">
+        <!-- ==================== الصفحة 1: الرئيسية ==================== -->
+        <main id="page-home" class="page-content active-page">
+            <header class="hero-section">
+                <div class="avatar-frame">
                     <div class="avatar-glow"></div>
-                    <div class="avatar"><i class="fa-solid fa-code-branch"></i></div>
+                    <div class="avatar-core"><i class="fa-solid fa-shuffle"></i></div>
                 </div>
                 <h1>جاسر اشلاف</h1>
-                <div class="typing-text" id="typewriter" aria-live="polite"></div>
-            </div>
-        </header>
+                <div class="typing-box" id="typewriter"></div>
+            </header>
 
-        <section class="reveal-section tilt-element">
-            <h2><i class="fa-solid fa-user-astronaut"></i> لمحة عني</h2>
-            <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.9;">
-                مطور ويب وباحث شغوف في مجال الإعلام الآلي، أجمع في فلسفتي بين منطق البرمجة وجماليات الفن. أرى الأكواد البرمجية كخطوط قلم الرصاص؛ كلاهما يبدأ من نقطة بيضاء لينتهي بلوحة فنية متكاملة الدقة والتفاصيل. اجتزت مؤخراً شهادة البكالوريا ومستعد لقيادة التحديات التقنية القادمة.
-            </p>
+            <section class="cyber-card tilt-element">
+                <h2><i class="fa-solid fa-user-astronaut"></i> الهوية البرمجية</h2>
+                <p style="font-size: 1.2rem; color: #94a3b8; line-height: 1.9;">
+                    مطور ويب وباحث جزائري يدمج بين صرامة الخوارزميات وانسيابية الفنون الكلاسيكية. نرى الأكواد كخطوط رصاص تتشابك لتشكل واجهات بصرية ذكية متكاملة. بطل ولاية بومرداس ومستعد لقيادة مشاريع الويب القادمة بقوة.
+                </p>
+                <div style="background: linear-gradient(135deg, rgba(244,63,94,0.1), rgba(129,140,248,0.1)); border: 1px solid rgba(244,63,94,0.2); padding: 25px; border-radius: 16px; display: flex; align-items: center; gap: 20px; margin-top: 30px;">
+                    <div style="font-size: 3rem; color: #fbbf24;"><i class="fa-solid fa-trophy"></i></div>
+                    <div>
+                        <h4 style="font-size: 1.3rem; color: #fff;">المرتبة الأولى - ولاية بومرداس</h4>
+                        <p style="color: #94a3b8; margin-top: 5px;">التتويج الرسمي كبطل لتطوير تطبيقات الويب على مستوى الولاية بأكملها.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ==================== الصفحة 2: استوديو الرسم الفني ==================== -->
+        <main id="page-art" class="page-content">
+            <section class="cyber-card">
+                <h2><i class="fa-solid fa-compass-drafting"></i> معرض ظلال الرصاص والجرافيتي</h2>
+                <p style="color: #94a3b8; margin-bottom: 20px;">هنا حيث يتحول الصبر والتركيز من رسم خطوط الظل والضوء إلى كتابة أسطر برمجية خالية من الأخطاء.</p>
+                
+                <div class="art-grid">
+                    <div class="art-item tilt-element">
+                        <div class="art-canvas-simulation">
+                            <div class="pencil-line"></div>
+                            <i class="fa-solid fa-user" style="font-size: 3rem; color: rgba(255,255,255,0.15);"></i>
+                        </div>
+                        <h4>رسم البورتريه والواقعية</h4>
+                        <p style="color: #64748b; font-size: 0.9rem; margin-top: 5px;">تطويع قلم الرصاص والظلال بدقة متناهية تحاكي بكسلات الشاشة.</p>
+                    </div>
+                    <div class="art-item tilt-element">
+                        <div class="art-canvas-simulation">
+                            <div class="pencil-line" style="animation-delay: 1s;"></div>
+                            <i class="fa-solid fa-spray-can" style="font-size: 3rem; color: rgba(255,255,255,0.15);"></i>
+                        </div>
+                        <h4>الفن الجرافيتي الحركي</h4>
+                        <p style="color: #64748b; font-size: 0.9rem; margin-top: 5px;">أفكار حرة متفجرة تنعكس في الألوان والأنيميشن التفاعلي للموقع.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ==================== الصفحة 3: الترسانة التقنية ==================== -->
+        <main id="page-tech" class="page-content">
+            <section class="cyber-card">
+                <h2><i class="fa-solid fa-bolt"></i> اللغات والحلول البرمجية</h2>
+                <p style="color: #94a3b8; margin-bottom: 30px;">الأسلحة البرمجية التي نستخدمها لبناء واجهات المستقبل التفاعلية بكفاءة معمارية عالية.</p>
+                
+                <div class="skills-matrix">
+                    <div class="matrix-box tilt-element">
+                        <div class="skill-header"><i class="fa-solid fa-code" style="color: var(--accent-neon);"></i> <h3>Full-Stack Frontend</h3></div>
+                        <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 10px;">إتقان خارق لـ HTML5، CSS3 الحديثة، وجافا سكريبت التفاعلية المتقدمة لبناء الأنظمة.</p>
+                    </div>
+                    <div class="matrix-box tilt-element">
+                        <div class="skill-header"><i class="fa-solid fa-microchip" style="color: var(--accent-purple);"></i> <h3>علوم الحاسوب والأنظمة</h3></div>
+                        <p style="color: #94a3b8; font-size: 0.95rem; margin-top: 10px;">فهم عميق للهياكل البرمجية، الشبكات، وحل المشكلات المعقدة بناءً على دراسة أكاديمية متينة.</p>
+                    </div>
+                </div>
+            </section>
             
-            <div class="trophy-card">
-                <div class="trophy-icon"><i class="fa-solid fa-crown"></i></div>
+            <section class="cyber-card" style="text-align: center; margin-top: 40px;">
+                <h2 style="justify-content: center;"><i class="fa-solid fa-network-wired"></i> قنوات الاتصال الفوري</h2>
+                <div class="social-box" style="display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap;">
+                    <a href="https://www.facebook.com/jas.hax.code?locale=ar_AR" target="_blank" rel="noopener noreferrer" class="btn-neon" style="--btn-color: #1877f2; text-decoration: none; padding: 12px 25px; border-radius: 50px; color: #fff; background: #111; border: 1px solid rgba(255,255,255,0.1);">Facebook</a>
+                    <a href="https://www.instagram.com/djasser_ach/" target="_blank" rel="noopener noreferrer" class="btn-neon" style="--btn-color: #e1306c; text-decoration: none; padding: 12px 25px; border-radius: 50px; color: #fff; background: #111; border: 1px solid rgba(255,255,255,0.1);">Instagram</a>
+                    <a href="https://wa.me/213796783270" target="_blank" rel="noopener noreferrer" class="btn-neon" style="--btn-color: #25d366; text-decoration: none; padding: 12px 25px; border-radius: 50px; color: #fff; background: #111; border: 1px solid rgba(255,255,255,0.1);">WhatsApp</a>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <!-- ==================== 🤖 نظام الـ AI المساعد المدمج في الزاوية 🤖 ==================== -->
+    <div class="ai-widget">
+        <button class="ai-trigger-btn" onclick="toggleAIWindow()" id="ai-btn">
+            <i class="fa-solid fa-robot"></i>
+        </button>
+        
+        <div class="ai-chat-window" id="ai-window">
+            <div class="ai-header">
+                <div class="ai-status-dot"></div>
                 <div>
-                    <h4 style="font-size: 1.25rem; color: #fff; margin-bottom: 5px;">بطل ولاية بومرداس في تطوير الويب</h4>
-                    <p style="color: var(--text-muted); margin: 0;">المرتبة الأولى في مسابقة تطوير تطبيقات الويب على مستوى الولاية.</p>
+                    <h4 style="font-size: 0.95rem; color: #fff;">المساعد الافتراضي لجاسر</h4>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">مدعوم بالذكاء الاصطناعي الخفيف</span>
                 </div>
             </div>
-        </section>
-
-        <section class="reveal-section tilt-element">
-            <h2><i class="fa-solid fa-cubes"></i> الأسلحة التقنية والفنية</h2>
-            <div class="skills-container">
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <i class="fa-solid fa-laptop-code" style="color: var(--accent-glow);"></i>
-                        <h3>تطوير الويب المتكامل</h3>
-                    </div>
-                    <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.6;">بناء واجهات مستخدم متجاوبة وحديثة باستخدام المعايير الاحترافية وتقنيات الويب الأساسية (HTML5 / CSS3 / JavaScript).</p>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <i class="fa-solid fa-graduation-cap" style="color: #a7f3d0;"></i>
-                        <h3>علوم الإعلام الآلي</h3>
-                    </div>
-                    <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.6;">حاصل على شهادة تلقين في الإعلام الآلي، مع فهم قوي لبنية الحاسوب، الأنظمة، والحلول البرمجية الذكية.</p>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <i class="fa-solid fa-pen-pencil" style="color: #fca5a5;"></i>
-                        <h3>الفن الجرافيتي والكلاسيكي</h3>
-                    </div>
-                    <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.6;">هواية رسم الرصاص والظلال، والتي تنعكس على عملي البرمجي من حيث قوة الصبر، دقة الملاحظة، والتنسيق البصري المريح.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="reveal-section tilt-element" style="text-align: center;">
-            <h2 style="justify-content: center;"><i class="fa-solid fa-satellite-dish"></i> لنتحدث تكنولوجيا!</h2>
-            <p style="color: var(--text-muted); margin-bottom: 35px; font-size: 1.1rem;">إذا كنت تبحث عن مطور يجمع بين كفاءة الكود ولمسة الفنان، دعنا نتواصل فوراً.</p>
             
-            <div class="social-box">
-                <a href="https://www.facebook.com/jas.hax.code?locale=ar_AR" target="_blank" rel="noopener noreferrer" class="btn-neon hover-trigger" style="--btn-color: #1877f2;">
-                    <i class="fa-brands fa-facebook-f"></i> Facebook
-                </a>
-                <a href="https://www.instagram.com/djasser_ach/" target="_blank" rel="noopener noreferrer" class="btn-neon hover-trigger" style="--btn-color: #e1306c;">
-                    <i class="fa-brands fa-instagram"></i> Instagram
-                </a>
-                <a href="https://wa.me/213796783270" target="_blank" rel="noopener noreferrer" class="btn-neon hover-trigger" style="--btn-color: #25d366;">
-                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
-                </a>
+            <div class="ai-messages-log" id="ai-log">
+                <div class="msg bot">أهلاً بك يا فنان! أنا العقل الاصطناعي المساعد للمطور جاسر اشلاف. اسألني عن أي شيء يخص مهاراته، فنه، أو إنجازه الخارق في بومرداس!</div>
             </div>
-        </section>
 
-    </main>
+            <!-- رقاقات أسئلة سريعة لراحة المستخدم وزيادة التفاعل -->
+            <div class="ai-chips-container">
+                <div class="ai-chip" onclick="askQuick('من هو جاسر؟')">من هو جاسر؟</div>
+                <div class="ai-chip" onclick="askQuick('ما هي جائزة بومرداس؟')">جائزة بومرداس؟</div>
+                <div class="ai-chip" onclick="askQuick('هل هو رسام حقاً؟')">موهبة الرسم؟</div>
+            </div>
 
-    <footer style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--glass-border);">
-        <p>صُنع بكود برمجي خارق وفكر فني عالي &copy; 2026 جاسر اشلاف</p>
+            <div class="ai-input-area">
+                <input type="text" class="ai-input" id="ai-input" placeholder="اكتب سؤالك هنا عن جاسر..." onkeypress="handleAIPress(event)">
+                <button class="ai-send-btn" onclick="processAIQuery()"><i class="fa-solid fa-paper-plane-top"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 40px; color: #64748b; font-size: 0.9rem; border-top: 1px solid var(--glass-border); margin-top: 60px;">
+        <p>النظام السيبراني المطور للفنان والمهندس &copy; 2026 جاسر اشلاف</p>
     </footer>
 
     <script>
-        // 1. نظام حركة الفأرة المخصص (Cyber Cursor)
-        const dotCursor = document.getElementById('dot-cursor');
-        const blurCursor = document.getElementById('blur-cursor');
-        let mouseX = 0, mouseY = 0;
-        let blurX = 0, blurY = 0;
+        // 1. إدارة التنقل السلس بين الصفحات (SPA Tabs Switcher)
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active-page'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active-tab'));
+            
+            document.getElementById(`page-${pageId}`).classList.add('active-page');
+            event.currentTarget.classList.add('active-tab');
+
+            // تغيير نمط الخلفية حسب نوع الصفحة لزيادة التفاعل الحماسي
+            if(pageId === 'art') canvasColor = 'rgba(244, 63, 94, 0.25)'; // أحمر فني
+            else if(pageId === 'tech') canvasColor = 'rgba(129, 140, 248, 0.25)'; // بنفسجي برميجي
+            else canvasColor = 'rgba(56, 189, 248, 0.22)'; // سيان النيون الافتراضي
+            init();
+        }
+
+        // 2. محرك الفأرة النيون (Cyber Cursor Tracker)
+        const dotC = document.getElementById('dot-c');
+        const ringC = document.getElementById('ring-c');
+        let mX = 0, mY = 0, rX = 0, rY = 0;
 
         window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            dotCursor.style.left = `${mouseX}px`;
-            dotCursor.style.top = `${mouseY}px`;
+            mX = e.clientX; mY = e.clientY;
+            dotC.style.left = `${mX}px`; dotC.style.top = `${mY}px`;
         });
 
-        // حركة مرنة تتبع المؤشر الرئيسي بسلاسة (Lerp Effect)
-        function animateCursor() {
-            blurX += (mouseX - blurX) * 0.15;
-            blurY += (mouseY - blurY) * 0.15;
-            blurCursor.style.left = `${blurX}px`;
-            blurCursor.style.top = `${blurY}px`;
-            requestAnimationFrame(animateCursor);
+        function updateRing() {
+            rX += (mX - rX) * 0.15; rY += (mY - rY) * 0.15;
+            ringC.style.left = `${rX}px`; ringC.style.top = `${rY}px`;
+            requestAnimationFrame(updateRing);
         }
-        animateCursor();
+        updateRing();
 
-        // تضخيم المؤشر عند تمريره على أي رابط أو زر تفاعلي
-        const interactiveElements = document.querySelectorAll('.btn-neon, .skill-item, .trophy-card');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
-            el.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
+        // تضخيم المؤشر عند ملامسة الأزرار أو الكروت
+        document.querySelectorAll('button, a, .cyber-card, .art-item, .ai-chip').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hover-link'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hover-link'));
         });
 
-
-        // 2. محرك الـ 3D Tilt البرمجي المخصص للبطاقات
-        const tiltCards = document.querySelectorAll('.tilt-element');
-        tiltCards.forEach(card => {
+        // 3. محرك الـ 3D Tilt للبطاقات
+        document.querySelectorAll('.tilt-element').forEach(card => {
             card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left; 
-                const y = e.clientY - rect.top; 
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                // حساب زاوية الالتواء القصوى (Max 8 درجات لتكون مريحة)
-                const rotateX = ((centerY - y) / centerY) * 8;
-                const rotateY = ((x - centerX) / centerX) * 8;
-
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
+                const r = card.getBoundingClientRect();
+                const x = e.clientX - r.left - (r.width/2);
+                const y = e.clientY - r.top - (r.height/2);
+                card.style.transform = `perspective(1000px) rotateX(${-y/10}deg) rotateY(${x/10}deg) scale(1.02)`;
             });
-
             card.addEventListener('mouseleave', () => {
                 card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
             });
         });
 
-
-        // 3. تأثير ظهور السكرول الذكي (Scroll Reveal)
-        const revealSections = document.querySelectorAll('.reveal-section');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.15 });
-
-        revealSections.forEach(sec => revealObserver.observe(sec));
-
-
-        // 4. تأثير الكتابة الذكية المتطور
-        const words = ["مطور تطبيقات ويب متميز", "بطل ولاية بومرداس البرمجي", "رسام رصاص يهوى التفاصيل", "خبير إعلام آلي مستقبلي"];
-        const typewriterElement = document.getElementById('typewriter');
-        let wordIndex = 0, charIndex = 0, isDeleting = false;
-
-        function typeEffect() {
-            const currentWord = words[wordIndex];
-            if (isDeleting) charIndex--; else charIndex++;
-
-            typewriterElement.textContent = currentWord.substring(0, charIndex);
-            let typeSpeed = isDeleting ? 30 : 80;
-
-            if (!isDeleting && charIndex === currentWord.length) {
-                typeSpeed = 2200; 
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                wordIndex = (wordIndex + 1) % words.length;
-                typeSpeed = 400;
-            }
-            setTimeout(typeEffect, typeSpeed);
+        // 4. تأثير الكتابة الذكية بالصفحة الرئيسية
+        const words = ["مطور تطبيقات ويب متميز", "بطل ولاية بومرداس البرمجي", "رسام رصاص يهوى التفاصيل الحية"];
+        let wIdx = 0, cIdx = 0, isDel = false;
+        function type() {
+            const cur = words[wIdx];
+            document.getElementById('typewriter').textContent = isDel ? cur.substring(0, cIdx--) : cur.substring(0, cIdx++);
+            let speed = isDel ? 30 : 80;
+            if (!isDel && cIdx === cur.length + 1) { speed = 2000; isDel = true; }
+            else if (isDel && cIdx === 0) { isDel = false; wIdx = (wIdx + 1) % words.length; speed = 400; }
+            setTimeout(type, speed);
         }
-        document.addEventListener("DOMContentLoaded", typeEffect);
+        type();
 
+        // ==================== 🤖 برمجة محرك الـ AI المساعد (قاعدة بيانات جاسر المدمجة) ====================
+        const aiWindow = document.getElementById('ai-window');
+        const aiLog = document.getElementById('ai-log');
+        const aiInput = document.getElementById('ai-input');
 
-        // 5. فيزياء الجزيئات التفاعلية المتطورة (تتنافر عند اقتراب الفأرة)
+        function toggleAIWindow() { aiWindow.classList.toggle('open'); }
+        function handleAIPress(e) { if(e.key === 'Enter') processAIQuery(); }
+        function askQuick(txt) { aiInput.value = txt; processAIQuery(); }
+
+        // محرك الاستجابة الذكي المبني على الكلمات المفتاحية لمطابقة دقيقة وسريعة لأسئلة المستخدم
+        function processAIQuery() {
+            const query = aiInput.value.trim();
+            if(!query) return;
+
+            // عرض رسالة المستخدم
+            appendMessage(query, 'user');
+            aiInput.value = '';
+
+            // محاكاة التفكير والكتابة
+            setTimeout(() => {
+                let reply = "سؤال ذكي! لكن لم أجد تفاصيل دقيقة عنه في أرشيفي الحالي. يمكنك سؤالي عن (مهارات جاسر، جائزة بومرداس، أو هواية الرسم بالرصاص) وسأعطيك الأسرار فوراً! 🔥";
+                const q = query.toLowerCase();
+
+                if(q.includes('من هو') || q.includes('جاسر') || q.includes('مين')) {
+                    reply = "جاسر اشلاف هو مطور ويب وباحث شغوف في الإعلام الآلي. يجمع بين منطق البرمجة وجماليات الفنون الكلاسيكية، وقد نال مؤخراً شهادة البكالوريا بنجاح لعام 2026 ليتفرغ تماماً للهندسة البرمجية! 🚀";
+                } else if(q.includes('بومرداس') || q.includes('جائزة') || q.includes('مسابقة') || q.includes('المرتبة')) {
+                    reply = "إنجاز جاسر الخارق! لقد حصد المرتبة الأولى وتوج رسمياً كبطل ولاية بومرداس في مسابقة تطوير تطبيقات الويب والحلول الذكية على مستوى الولاية بأكملها! 🏆🥇";
+                } else if(q.includes('رسم') || q.includes('فنان') || q.includes('رصاص') || q.includes('ظلال')) {
+                    reply = "جاسر رسام محترف يهوى الرسم بقلم الرصاص والظلال والفن الجرافيتي الحركي. يرى أن دقة تظليل اللوحة هي نفسها دقة كتابة كود برميجي متناسق ومريح للعين! 🎨✍️";
+                } else if(q.includes('مهارات') || q.includes('لغات') || q.includes('برمجة') || q.includes('تقنيات')) {
+                    reply = "ترسانة جاسر التقنية قوية جداً: يتقن مهارات الـ Full-Stack Frontend (HTML5, CSS3, JavaScript المتطورة والتفاعلية)، بالإضافة إلى فهم عميق لعلوم وبنية الحاسوب والحلول البرمجية الذكية! 💻⚡";
+                } else if(q.includes('تواصل') || q.includes('رقم') || q.includes('حساب') || q.includes('فيسبوك')) {
+                    reply = "يمكنك التواصل مع جاسر مباشرة والبدء في عمل تكنولوجي مشترك عبر الأزرار الموجودة في صفحة 'الترسانة التقنية' أو عبر حسابه في فيسبوك وإنستغرام المتاحين بالموقع! 📞🌐";
+                }
+
+                appendMessage(reply, 'bot');
+            }, 600);
+        }
+
+        function appendMessage(txt, sender) {
+            const m = document.createElement('div');
+            m.className = `msg ${sender}`;
+            m.textContent = txt;
+            aiLog.appendChild(m);
+            aiLog.scrollTop = aiLog.scrollHeight; // التمرير التلقائي لآخر رسالة
+        }
+
+        // 5. فيزياء الجزيئات المتطورة بالخلفية
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray;
+        let canvasColor = 'rgba(56, 189, 248, 0.22)';
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        let mouse = { x: null, y: null, radius: 120 }; // دائرة التفاعل للفأرة
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let mouse = { x: null, y: null, radius: 130 };
         window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
-        window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
 
         class Particle {
-            constructor(x, y, directionX, directionY, size, color) {
-                this.x = x; this.y = y;
-                this.directionX = directionX; this.directionY = directionY;
-                this.size = size; this.color = color;
-                this.baseX = x; this.baseY = y; // حفظ مكانها الأصلي للمرونة
+            constructor(x, y, dx, dy, size) {
+                this.x = x; this.y = y; this.dx = dx; this.dy = dy; this.size = size;
             }
             draw() {
                 ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color; ctx.fill();
+                ctx.fillStyle = canvasColor; ctx.fill();
             }
             update() {
-                // فحص الاصطدام والابتعاد عن الفأرة (Physics Repulsion)
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < mouse.radius) {
-                    let forceDirectionX = dx / distance;
-                    let forceDirectionY = dy / distance;
-                    let maxDistance = mouse.radius;
-                    let force = (maxDistance - distance) / maxDistance;
-                    let directionX = forceDirectionX * force * 5;
-                    let directionY = forceDirectionY * force * 5;
-                    this.x -= directionX;
-                    this.y -= directionY;
+                let diffX = mouse.x - this.x; let diffY = mouse.y - this.y;
+                let dist = Math.sqrt(diffX*diffX + diffY*diffY);
+                if (dist < mouse.radius) {
+                    // فيزياء التنافر عند اقتراب الفأرة
+                    this.x -= (diffX / dist) * 4; this.y -= (diffY / dist) * 4;
                 } else {
-                    // العودة للمسار العادي بسلاسة إذا ابتعدت الفأرة
-                    if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-                    if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-                    this.x += this.directionX; this.y += this.directionY;
+                    if (this.x > canvas.width || this.x < 0) this.dx = -this.dx;
+                    if (this.y > canvas.height || this.y < 0) this.dy = -this.dy;
+                    this.x += this.dx; this.y += this.dy;
                 }
                 this.draw();
             }
@@ -536,14 +531,12 @@
 
         function init() {
             particlesArray = [];
-            let numberOfParticles = (canvas.height * canvas.width) / 9500;
-            for (let i = 0; i < numberOfParticles; i++) {
-                let size = (Math.random() * 2) + 1;
-                let x = Math.random() * innerWidth;
-                let y = Math.random() * innerHeight;
-                let directionX = (Math.random() * 0.4) - 0.2;
-                let directionY = (Math.random() * 0.4) - 0.2;
-                particlesArray.push(new Particle(x, y, directionX, directionY, size, 'rgba(56, 189, 248, 0.22)'));
+            let num = (canvas.height * canvas.width) / 9000;
+            for (let i = 0; i < num; i++) {
+                particlesArray.push(new Particle(
+                    Math.random() * innerWidth, Math.random() * innerHeight,
+                    (Math.random() * 0.4) - 0.2, (Math.random() * 0.4) - 0.2, (Math.random() * 2) + 1
+                ));
             }
         }
 
@@ -551,17 +544,12 @@
             requestAnimationFrame(animate);
             ctx.clearRect(0,0,innerWidth, innerHeight);
             for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update();
-            connect();
-        }
-
-        function connect() {
+            // خطوط الربط العصبي بين الجزيئات لمظهر سيبراني متكامل
             for (let a = 0; a < particlesArray.length; a++) {
                 for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
-                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    if (distance < (canvas.width/7) * (canvas.height/7)) {
-                        ctx.strokeStyle = 'rgba(129, 140, 248, 0.03)';
-                        ctx.lineWidth = 1; ctx.beginPath();
+                    let d = ((particlesArray[a].x - particlesArray[b].x)**2) + ((particlesArray[a].y - particlesArray[b].y)**2);
+                    if (d < (canvas.width/7) * (canvas.height/7)) {
+                        ctx.strokeStyle = 'rgba(129, 140, 248, 0.03)'; ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
                         ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke();
                     }
