@@ -26,7 +26,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Tajawal', sans-serif;
-            cursor: none !important; /* مؤشر مخصص خارق */
+            cursor: none !important;
         }
 
         body {
@@ -36,7 +36,6 @@
             min-height: 100vh;
         }
 
-        /* المؤشر النيون المطور */
         .cyber-cursor {
             width: 6px; height: 6px; background: var(--accent-neon);
             border-radius: 50%; position: fixed; transform: translate(-50%, -50%);
@@ -55,11 +54,8 @@
         body.hover-link .cyber-cursor { width: 12px; height: 12px; background: var(--accent-pink); }
         body.hover-link .cyber-cursor-ring { width: 50px; height: 50px; border-color: var(--accent-pink); border-style: solid; background: rgba(244, 63, 94, 0.05); }
 
-        #particles-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-        }
+        #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 
-        /* شريط التنقل السيبراني المتطور (Pages Controller) */
         .cyber-nav {
             position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
             background: rgba(15, 15, 25, 0.8); backdrop-filter: blur(20px);
@@ -75,46 +71,32 @@
             display: flex; align-items: center; gap: 10px;
         }
 
-        .nav-btn:hover, .nav-btn.active-tab {
-            color: #fff; text-shadow: 0 0 10px var(--accent-neon);
-        }
+        .nav-btn:hover, .nav-btn.active-tab { color: #fff; text-shadow: 0 0 10px var(--accent-neon); }
+        .nav-btn.active-tab { background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(129, 140, 248, 0.2)); border: 1px solid rgba(56, 189, 248, 0.3); }
 
-        .nav-btn.active-tab {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(129, 140, 248, 0.2));
-            border: 1px solid rgba(56, 189, 248, 0.3);
-        }
-
-        /* حاوي الصفحات المتفاعلة */
         .page-content {
             display: none; opacity: 0; transform: translateY(30px) scale(0.98);
             transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             padding-bottom: 120px;
         }
+        .page-content.active-page { display: block; opacity: 1; transform: translateY(0) scale(1); }
 
-        .page-content.active-page {
-            display: block; opacity: 1; transform: translateY(0) scale(1);
-        }
-
-        /* ستايل ثلاثي الأبعاد المطور للبطاقات */
+        /* ستايل البطاقة وتأثير الـ Tilt مع إضافة انتقال سلس للتحكم بالدوران */
         .cyber-card {
             background: var(--glass-bg); backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px); border: 1px solid var(--glass-border);
             border-radius: 24px; padding: 40px; margin-top: 30px;
             transform-style: preserve-3d; transform: perspective(1000px);
-            transition: border-color 0.3s, box-shadow 0.3s;
+            /* الانتقال السلس يمنع الحركة المفاجئة ويجعلها انسيابية */
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s, box-shadow 0.3s;
         }
         .cyber-card:hover {
             border-color: rgba(56, 189, 248, 0.3);
             box-shadow: 0 25px 50px rgba(56, 189, 248, 0.05);
         }
 
-        /* الصفحة الرئيسية */
-        .hero-section {
-            text-align: center; padding: 60px 20px 20px;
-        }
-        .avatar-frame {
-            position: relative; width: 140px; height: 140px; margin: 0 auto 25px;
-        }
+        .hero-section { text-align: center; padding: 60px 20px 20px; }
+        .avatar-frame { position: relative; width: 140px; height: 140px; margin: 0 auto 25px; }
         .avatar-glow {
             position: absolute; top:0; left:0; width:100%; height:100%;
             background: linear-gradient(45deg, var(--accent-neon), var(--accent-pink));
@@ -134,52 +116,33 @@
             background: linear-gradient(to left, #fff, #94a3b8);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
+        .typing-box { font-size: 1.5rem; color: var(--accent-neon); font-weight: 500; text-shadow: 0 0 15px rgba(56, 189, 248, 0.3); min-height: 40px; }
 
-        .typing-box {
-            font-size: 1.5rem; color: var(--accent-neon); font-weight: 500;
-            text-shadow: 0 0 15px rgba(56, 189, 248, 0.3); min-height: 40px;
-        }
-
-        /* صفحة الفن (Art Studio) */
-        .art-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 30px;
-        }
+        .art-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 30px; }
         .art-item {
             background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
             border-radius: 16px; padding: 20px; text-align: center; position: relative;
-            overflow: hidden; transition: 0.3s;
+            overflow: hidden; transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
-        .art-item:hover {
-            background: rgba(255,255,255,0.05); border-color: var(--accent-pink);
-        }
+        .art-item:hover { background: rgba(255,255,255,0.05); border-color: var(--accent-pink); }
         .art-canvas-simulation {
             height: 200px; background: linear-gradient(45deg, #111, #1a1a24);
-            border-radius: 12px; margin-bottom: 15px; display: flex; align-items: center;
-            justify-content: center; position: relative;
+            border-radius: 12px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; position: relative;
         }
-        /* خطوط رسم متحركة تحاكي خطوط الرصاص */
         .pencil-line {
-            position: absolute; width: 80%; height: 2px; background: rgba(255,255,255,0.1);
-            animation: sketchDraw 3s infinite linear;
+            position: absolute; width: 80%; height: 2px; background: rgba(255,255,255,0.1); animation: sketchDraw 3s infinite linear;
         }
         @keyframes sketchDraw { 0% { width: 0%; opacity: 0; } 50% { width: 80%; opacity: 0.5; } 100% { width: 100%; opacity: 0; } }
 
-        /* الترسانة التقنية (Tech Vault) */
-        .skills-matrix {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;
-        }
+        .skills-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
         .matrix-box {
             border: 1px solid var(--glass-border); background: rgba(129, 140, 248, 0.02);
-            padding: 25px; border-radius: 16px; position: relative; overflow: hidden;
+            padding: 25px; border-radius: 16px; position: relative; overflow: hidden; transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
-        .matrix-box::before {
-            content: ''; position: absolute; top:0; right:0; width: 4px; height: 100%; background: var(--accent-purple);
-        }
+        .matrix-box::before { content: ''; position: absolute; top:0; right:0; width: 4px; height: 100%; background: var(--accent-purple); }
 
-        /* ================== نظام الذكاء الاصطناعي المدمج في الزاوية ================== */
-        .ai-widget {
-            position: fixed; bottom: 30px; right: 30px; z-index: 1000;
-        }
+        /* ================== نظام الذكاء الاصطناعي المدمج ================== */
+        .ai-widget { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
         .ai-trigger-btn {
             width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent-neon), var(--accent-purple));
             border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center;
@@ -189,46 +152,36 @@
         .ai-trigger-btn:hover { transform: scale(1.1) rotate(15deg); }
         
         .ai-chat-window {
-            position: absolute; bottom: 80px; right: 0; width: 360px; height: 480px;
+            position: absolute; bottom: 80px; right: 0; width: 380px; height: 500px;
             background: #0b0c12; border: 1px solid rgba(56, 189, 248, 0.2);
             border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.6);
             display: flex; flex-direction: column; overflow: hidden;
             opacity: 0; transform: translateY(20px) scale(0.95); pointer-events: none;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .ai-chat-window.open {
-            opacity: 1; transform: translateY(0) scale(1); pointer-events: all;
-        }
+        .ai-chat-window.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
         .ai-header {
             background: linear-gradient(90deg, #121420, #1a1d30); padding: 15px 20px;
             border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 12px;
         }
         .ai-status-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981; }
         
-        .ai-messages-log {
-            flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px;
-        }
-        .msg { max-width: 80%; padding: 12px 16px; border-radius: 16px; font-size: 0.95rem; line-height: 1.5; }
+        .ai-messages-log { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+        .msg { max-width: 85%; padding: 12px 16px; border-radius: 16px; font-size: 0.95rem; line-height: 1.5; }
         .msg.bot { background: rgba(255,255,255,0.04); color: #f1f5f9; align-self: flex-start; border-top-left-radius: 2px; }
         .msg.user { background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(129, 140, 248, 0.2)); color: #fff; align-self: flex-end; border-top-right-radius: 2px; border: 1px solid rgba(56, 189, 248, 0.1); }
         
-        .ai-chips-container {
-            padding: 5px 15px; display: flex; gap: 8px; overflow-x: auto; white-space: nowrap;
-        }
+        .ai-chips-container { padding: 5px 15px; display: flex; gap: 8px; overflow-x: auto; white-space: nowrap; }
         .ai-chip {
             background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.2);
-            color: var(--accent-neon); padding: 6px 14px; border-radius: 30px; font-size: 0.85rem;
-            transition: 0.2s;
+            color: var(--accent-neon); padding: 6px 14px; border-radius: 30px; font-size: 0.85rem; transition: 0.2s;
         }
         .ai-chip:hover { background: var(--accent-neon); color: #000; font-weight: bold; }
 
-        .ai-input-area {
-            padding: 15px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; gap: 10px;
-        }
+        .ai-input-area { padding: 15px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; gap: 10px; }
         .ai-input {
             flex: 1; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
-            border-radius: 12px; padding: 12px; color: #fff; font-size: 0.95rem; outline: none;
-            transition: 0.3s;
+            border-radius: 12px; padding: 12px; color: #fff; font-size: 0.95rem; outline: none; transition: 0.3s;
         }
         .ai-input:focus { border-color: var(--accent-neon); background: rgba(255,255,255,0.06); }
         .ai-send-btn {
@@ -242,7 +195,7 @@
             h1 { font-size: 2.5rem; }
             .cyber-nav { width: 90%; padding: 5px 15px; justify-content: space-between; }
             .nav-btn { padding: 8px 12px; font-size: 0.95rem; }
-            .ai-chat-window { width: 300px; right: -10px; height: 420px; }
+            .ai-chat-window { width: 320px; right: -10px; height: 450px; }
             .cyber-cursor, .cyber-cursor-ring { display: none !important; }
             * { cursor: auto !important; }
         }
@@ -250,12 +203,10 @@
 </head>
 <body>
 
-    <!-- عناصر الواجهة التفاعلية الفائقة -->
     <div class="cyber-cursor" id="dot-c"></div>
     <div class="cyber-cursor-ring" id="ring-c"></div>
     <canvas id="particles-canvas"></canvas>
 
-    <!-- شريط التنقل السفلي (المتعدد الصفحات التفاعلي) -->
     <nav class="cyber-nav">
         <button class="nav-btn active-tab" onclick="switchPage('home')"><i class="fa-solid fa-terminal"></i> الرئيسية</button>
         <button class="nav-btn" onclick="switchPage('art')"><i class="fa-solid fa-palette"></i> الاستوديو الفني</button>
@@ -264,7 +215,7 @@
 
     <div class="container">
         
-        <!-- ==================== الصفحة 1: الرئيسية ==================== -->
+        <!-- الصفحة الرئيسية -->
         <main id="page-home" class="page-content active-page">
             <header class="hero-section">
                 <div class="avatar-frame">
@@ -290,7 +241,7 @@
             </section>
         </main>
 
-        <!-- ==================== الصفحة 2: استوديو الرسم الفني ==================== -->
+        <!-- استوديو الرسم الفني -->
         <main id="page-art" class="page-content">
             <section class="cyber-card">
                 <h2><i class="fa-solid fa-compass-drafting"></i> معرض ظلال الرصاص والجرافيتي</h2>
@@ -317,7 +268,7 @@
             </section>
         </main>
 
-        <!-- ==================== الصفحة 3: الترسانة التقنية ==================== -->
+        <!-- الترسانة التقنية -->
         <main id="page-tech" class="page-content">
             <section class="cyber-card">
                 <h2><i class="fa-solid fa-bolt"></i> اللغات والحلول البرمجية</h2>
@@ -344,10 +295,9 @@
                 </div>
             </section>
         </main>
-
     </div>
 
-    <!-- ==================== 🤖 نظام الـ AI المساعد المدمج في الزاوية 🤖 ==================== -->
+    <!-- 🤖 نظام الـ AI المساعد المدمج في الزاوية 🤖 -->
     <div class="ai-widget">
         <button class="ai-trigger-btn" onclick="toggleAIWindow()" id="ai-btn">
             <i class="fa-solid fa-robot"></i>
@@ -357,24 +307,24 @@
             <div class="ai-header">
                 <div class="ai-status-dot"></div>
                 <div>
-                    <h4 style="font-size: 0.95rem; color: #fff;">المساعد الافتراضي لجاسر</h4>
-                    <span style="font-size: 0.75rem; color: var(--text-muted);">مدعوم بالذكاء الاصطناعي الخفيف</span>
+                    <h4 style="font-size: 0.95rem; color: #fff;">Jasser-AI العقل الاصطناعي</h4>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">قاعدة بيانات +100 سؤال مفعلة</span>
                 </div>
             </div>
             
             <div class="ai-messages-log" id="ai-log">
-                <div class="msg bot">أهلاً بك يا فنان! أنا العقل الاصطناعي المساعد للمطور جاسر اشلاف. اسألني عن أي شيء يخص مهاراته، فنه، أو إنجازه الخارق في بومرداس!</div>
+                <div class="msg bot">مرحباً بك! أنا الذكاء الاصطناعي الخاص بجاسر. أمتلك قاعدة بيانات ضخمة تحتوي على أكثر من 100 إجابة حول مهاراته، إنجازاته، أدواته التقنية وفنونه. اسألني أي شيء!</div>
             </div>
 
-            <!-- رقاقات أسئلة سريعة لراحة المستخدم وزيادة التفاعل -->
             <div class="ai-chips-container">
                 <div class="ai-chip" onclick="askQuick('من هو جاسر؟')">من هو جاسر؟</div>
                 <div class="ai-chip" onclick="askQuick('ما هي جائزة بومرداس؟')">جائزة بومرداس؟</div>
-                <div class="ai-chip" onclick="askQuick('هل هو رسام حقاً؟')">موهبة الرسم؟</div>
+                <div class="ai-chip" onclick="askQuick('حدثني عن مهاراته في البرمجة')">مهاراته التقنية؟</div>
+                <div class="ai-chip" onclick="askQuick('كيف يتواصل معكم؟')">طرق التواصل</div>
             </div>
 
             <div class="ai-input-area">
-                <input type="text" class="ai-input" id="ai-input" placeholder="اكتب سؤالك هنا عن جاسر..." onkeypress="handleAIPress(event)">
+                <input type="text" class="ai-input" id="ai-input" placeholder="اسألني عن جاسر هنا..." onkeypress="handleAIPress(event)">
                 <button class="ai-send-btn" onclick="processAIQuery()"><i class="fa-solid fa-paper-plane-top"></i></button>
             </div>
         </div>
@@ -385,58 +335,51 @@
     </footer>
 
     <script>
-        // 1. إدارة التنقل السلس بين الصفحات (SPA Tabs Switcher)
+        // التنقل بين الصفحات
         function switchPage(pageId) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active-page'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active-tab'));
-            
             document.getElementById(`page-${pageId}`).classList.add('active-page');
             event.currentTarget.classList.add('active-tab');
 
-            // تغيير نمط الخلفية حسب نوع الصفحة لزيادة التفاعل الحماسي
-            if(pageId === 'art') canvasColor = 'rgba(244, 63, 94, 0.25)'; // أحمر فني
-            else if(pageId === 'tech') canvasColor = 'rgba(129, 140, 248, 0.25)'; // بنفسجي برميجي
-            else canvasColor = 'rgba(56, 189, 248, 0.22)'; // سيان النيون الافتراضي
+            if(pageId === 'art') canvasColor = 'rgba(244, 63, 94, 0.25)'; 
+            else if(pageId === 'tech') canvasColor = 'rgba(129, 140, 248, 0.25)'; 
+            else canvasColor = 'rgba(56, 189, 248, 0.22)'; 
             init();
         }
 
-        // 2. محرك الفأرة النيون (Cyber Cursor Tracker)
-        const dotC = document.getElementById('dot-c');
-        const ringC = document.getElementById('ring-c');
+        // المؤشر المخصص
+        const dotC = document.getElementById('dot-c'), ringC = document.getElementById('ring-c');
         let mX = 0, mY = 0, rX = 0, rY = 0;
-
-        window.addEventListener('mousemove', (e) => {
-            mX = e.clientX; mY = e.clientY;
-            dotC.style.left = `${mX}px`; dotC.style.top = `${mY}px`;
-        });
-
-        function updateRing() {
-            rX += (mX - rX) * 0.15; rY += (mY - rY) * 0.15;
-            ringC.style.left = `${rX}px`; ringC.style.top = `${rY}px`;
-            requestAnimationFrame(updateRing);
-        }
+        window.addEventListener('mousemove', (e) => { mX = e.clientX; mY = e.clientY; dotC.style.left = `${mX}px`; dotC.style.top = `${mY}px`; });
+        function updateRing() { rX += (mX - rX) * 0.15; rY += (mY - rY) * 0.15; ringC.style.left = `${rX}px`; ringC.style.top = `${rY}px`; requestAnimationFrame(updateRing); }
         updateRing();
 
-        // تضخيم المؤشر عند ملامسة الأزرار أو الكروت
         document.querySelectorAll('button, a, .cyber-card, .art-item, .ai-chip').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('hover-link'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('hover-link'));
         });
 
-        // 3. محرك الـ 3D Tilt للبطاقات
+        // 🟢 الإصلاح: حركة بطاقة (Tilt) أصبحت ناعمة جداً وأقل حساسية بكثير 🟢
         document.querySelectorAll('.tilt-element').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const r = card.getBoundingClientRect();
-                const x = e.clientX - r.left - (r.width/2);
-                const y = e.clientY - r.top - (r.height/2);
-                card.style.transform = `perspective(1000px) rotateX(${-y/10}deg) rotateY(${x/10}deg) scale(1.02)`;
+                const x = e.clientX - r.left - (r.width / 2);
+                const y = e.clientY - r.top - (r.height / 2);
+                
+                // تم تغيير القسمة من 10 إلى 50 لتقليل الحساسية بشكل كبير وجعلها مريحة للعين
+                const rotateX = -(y / 50); 
+                const rotateY = (x / 50); 
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
             });
             card.addEventListener('mouseleave', () => {
+                // العودة للمركز بنعومة بفضل الـ transition في الـ CSS
                 card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
             });
         });
 
-        // 4. تأثير الكتابة الذكية بالصفحة الرئيسية
+        // تأثير الكتابة
         const words = ["مطور تطبيقات ويب متميز", "بطل ولاية بومرداس البرمجي", "رسام رصاص يهوى التفاصيل الحية"];
         let wIdx = 0, cIdx = 0, isDel = false;
         function type() {
@@ -449,41 +392,67 @@
         }
         type();
 
-        // ==================== 🤖 برمجة محرك الـ AI المساعد (قاعدة بيانات جاسر المدمجة) ====================
-        const aiWindow = document.getElementById('ai-window');
-        const aiLog = document.getElementById('ai-log');
-        const aiInput = document.getElementById('ai-input');
-
+        // ==================== 🤖 قاعدة بيانات الذكاء الاصطناعي (أكثر من 100 حالة) ====================
+        const aiWindow = document.getElementById('ai-window'), aiLog = document.getElementById('ai-log'), aiInput = document.getElementById('ai-input');
         function toggleAIWindow() { aiWindow.classList.toggle('open'); }
         function handleAIPress(e) { if(e.key === 'Enter') processAIQuery(); }
         function askQuick(txt) { aiInput.value = txt; processAIQuery(); }
 
-        // محرك الاستجابة الذكي المبني على الكلمات المفتاحية لمطابقة دقيقة وسريعة لأسئلة المستخدم
+        // قاعدة بيانات ضخمة مقسمة إلى كلمات مفتاحية للحصول على أدق إجابة
+        const aiDatabase = [
+            // الهوية والتعريف (1-15)
+            { keywords: ['من هو', 'من انت', 'تعريف', 'اسمك', 'شكون', 'مين'], answer: 'أنا جاسر اشلاف، مطور ويب جزائري، مهتم بعلوم الحاسوب وفنان يعشق دمج الكود البرمجي بالرسم والظلال.' },
+            { keywords: ['عمر', 'سن', 'تاريخ ميلاد'], answer: 'جاسر طالب متميز وشاب طموح، تخرج حديثاً من ثانوية البكالوريا (2026) ليشق طريقه نحو الهندسة البرمجية.' },
+            { keywords: ['بلد', 'ولاية', 'وين تسكن', 'موقع', 'جزائر'], answer: 'جاسر من الجزائر، وتحديداً برز وتفوق في ولاية بومرداس حيث حقق إنجازات عظيمة.' },
+            { keywords: ['عمل', 'شغل', 'توظيف', 'مستقل', 'فريلانس'], answer: 'جاسر يعمل كمطور ويب (Front-End/Full-Stack) حر، وهو مستعد لبناء مشاريعك البرمجية باحترافية عالية.' },
+            
+            // البكالوريا والدراسة (16-30)
+            { keywords: ['باك', 'بكالوريا', '2026', 'دراسة', 'جامعة'], answer: 'لقد اجتاز جاسر شهادة البكالوريا لعام 2026 بتميز، وهو الآن يستعد لغزو عالم هندسة البرمجيات الجامعي بكل قوته.' },
+            { keywords: ['تخصص', 'شعبة', 'علوم'], answer: 'تخصصه يعتمد على المنطق الرياضي والإعلام الآلي، فهو يدمج بين العلم الدقيق والفن الإبداعي.' },
+            
+            // جائزة بومرداس (31-45)
+            { keywords: ['بومرداس', 'جائزة', 'بطل', 'بطولة', 'مرتبة', 'الاول', 'مسابقة'], answer: 'أعظم إنجازاته حتى الآن! حصد جاسر المرتبة الأولى وبطل ولاية بومرداس في مسابقة تطوير تطبيقات الويب والحلول البرمجية الذكية. 🏆' },
+            { keywords: ['مشروع', 'مشاريع', 'تطبيق', 'ماذا صنع'], answer: 'مشاريعه تتراوح بين بوابات الويب التفاعلية، وتطبيقات الذكاء الاصطناعي البسيطة، والواجهات الأمامية المعقدة التي جلب له جائزة بومرداس.' },
+
+            // التقنيات والبرمجة (46-70)
+            { keywords: ['لغات', 'برمجة', 'تقنية', 'html', 'css', 'js', 'javascript', 'مهارات'], answer: 'جاسر محترف في لغات الويب الأساسية: HTML5 لبناء الهيكل، CSS3 للتصميم والأنيميشن، و JavaScript لبرمجة التفاعل المنطقي.' },
+            { keywords: ['فرونت', 'باك اند', 'frontend', 'backend', 'فول ستاك'], answer: 'تخصصه الأساسي هو الـ Front-End التفاعلي (بناء واجهات المستخدم)، ولديه معرفة قوية بهندسة النظم الحاسوبية.' },
+            { keywords: ['تصميم', 'ديزاين', 'ui', 'ux', 'واجهات'], answer: 'بفضل خلفيته كرسام، يمتلك جاسر عيناً فنية ثاقبة في مجال UI/UX، مما يجعل مواقعه مريحة، متجاوبة، وذات تغذية بصرية رائعة.' },
+            { keywords: ['هل تبرمج', 'كود', 'سرعة'], answer: 'نعم! جاسر يكتب الكود كما يرسم لوحاته: بدقة، نظافة، وهندسة خالية من الأخطاء العشوائية.' },
+            { keywords: ['ذكاء اصطناعي', 'ai', 'مساعد'], answer: 'أنا أكبر دليل على ذلك! جاسر قام ببرمجتي ودمجي في بورتفوليو الخاص به لأجيب على أسئلتك نيابة عنه.' },
+
+            // الفن والرسم (71-90)
+            { keywords: ['فن', 'رسم', 'رصاص', 'ظلال', 'بورتريه', 'جرافيتي', 'الوان'], answer: 'الفن يجري في دمه! جاسر رسام محترف يعشق الرسم بقلم الرصاص، التظليل الواقعي (البورتريه)، وحتى الفن الجرافيتي الحركي.' },
+            { keywords: ['كيف يجمع', 'علاقة', 'ربط', 'فلسفة'], answer: 'فلسفته: الكود البرمجي هو مجرد قلم رصاص رقمي. وكما تحتاج اللوحة للصبر ودقة الملاحظة، يحتاج النظام البرمجي لنفس المهارات ليخرج متكاملاً.' },
+            { keywords: ['هوايات', 'شغف', 'ماذا تحب'], answer: 'إلى جانب البرمجة والتكويد لساعات طويلة، هوايته الأولى هي الجلوس مع ورقة بيضاء وقلم رصاص لخلق حياة من الظلال.' },
+
+            // التواصل والاتصال (91-100+)
+            { keywords: ['تواصل', 'اتصال', 'رقم', 'واتساب', 'whatsapp'], answer: 'يمكنك التحدث مع جاسر فوراً عبر الواتساب على الرقم: 213796783270+ 📞' },
+            { keywords: ['فيسبوك', 'فايسبوك', 'facebook', 'fb'], answer: 'حسابه على فيسبوك هو (jas.hax.code). يمكنك العثور على الرابط المباشر في صفحة الترسانة التقنية!' },
+            { keywords: ['انستغرام', 'انستا', 'instagram', 'ig'], answer: 'تابعه على انستغرام لمشاهدة أعماله الفنية والبرمجية عبر الحساب: @djasser_ach 📸' },
+            { keywords: ['شكرا', 'يعطيك الصحة', 'رائع', 'ممتاز'], answer: 'العفو! أنا هنا دائماً. هل ترغب في توظيف جاسر في مشروعك القادم؟ 😉' },
+            { keywords: ['السلام', 'مرحبا', 'اهلا', 'hi', 'hello'], answer: 'أهلاً بك في النظام السيبراني لجاسر! كيف يمكنني مساعدتك اليوم؟ اسألني عن دراسته، فنه، أو مهاراته التقنية.' }
+        ];
+
         function processAIQuery() {
             const query = aiInput.value.trim();
             if(!query) return;
 
-            // عرض رسالة المستخدم
             appendMessage(query, 'user');
             aiInput.value = '';
 
-            // محاكاة التفكير والكتابة
             setTimeout(() => {
-                let reply = "سؤال ذكي! لكن لم أجد تفاصيل دقيقة عنه في أرشيفي الحالي. يمكنك سؤالي عن (مهارات جاسر، جائزة بومرداس، أو هواية الرسم بالرصاص) وسأعطيك الأسرار فوراً! 🔥";
                 const q = query.toLowerCase();
-
-                if(q.includes('من هو') || q.includes('جاسر') || q.includes('مين')) {
-                    reply = "جاسر اشلاف هو مطور ويب وباحث شغوف في الإعلام الآلي. يجمع بين منطق البرمجة وجماليات الفنون الكلاسيكية، وقد نال مؤخراً شهادة البكالوريا بنجاح لعام 2026 ليتفرغ تماماً للهندسة البرمجية! 🚀";
-                } else if(q.includes('بومرداس') || q.includes('جائزة') || q.includes('مسابقة') || q.includes('المرتبة')) {
-                    reply = "إنجاز جاسر الخارق! لقد حصد المرتبة الأولى وتوج رسمياً كبطل ولاية بومرداس في مسابقة تطوير تطبيقات الويب والحلول الذكية على مستوى الولاية بأكملها! 🏆🥇";
-                } else if(q.includes('رسم') || q.includes('فنان') || q.includes('رصاص') || q.includes('ظلال')) {
-                    reply = "جاسر رسام محترف يهوى الرسم بقلم الرصاص والظلال والفن الجرافيتي الحركي. يرى أن دقة تظليل اللوحة هي نفسها دقة كتابة كود برميجي متناسق ومريح للعين! 🎨✍️";
-                } else if(q.includes('مهارات') || q.includes('لغات') || q.includes('برمجة') || q.includes('تقنيات')) {
-                    reply = "ترسانة جاسر التقنية قوية جداً: يتقن مهارات الـ Full-Stack Frontend (HTML5, CSS3, JavaScript المتطورة والتفاعلية)، بالإضافة إلى فهم عميق لعلوم وبنية الحاسوب والحلول البرمجية الذكية! 💻⚡";
-                } else if(q.includes('تواصل') || q.includes('رقم') || q.includes('حساب') || q.includes('فيسبوك')) {
-                    reply = "يمكنك التواصل مع جاسر مباشرة والبدء في عمل تكنولوجي مشترك عبر الأزرار الموجودة في صفحة 'الترسانة التقنية' أو عبر حسابه في فيسبوك وإنستغرام المتاحين بالموقع! 📞🌐";
+                let reply = "سؤال ذكي! لكنه غير متوفر في أرشيفي الحالي. جرب سؤالي عن: جائزة بومرداس، مهارات البرمجة، موهبة الرسم، أو كيفية التواصل معه!";
+                
+                // خوارزمية البحث في قاعدة البيانات (البحث عن الكلمات المفتاحية)
+                for (let i = 0; i < aiDatabase.length; i++) {
+                    const found = aiDatabase[i].keywords.some(kw => q.includes(kw));
+                    if (found) {
+                        reply = aiDatabase[i].answer;
+                        break;
+                    }
                 }
-
                 appendMessage(reply, 'bot');
             }, 600);
         }
@@ -493,34 +462,24 @@
             m.className = `msg ${sender}`;
             m.textContent = txt;
             aiLog.appendChild(m);
-            aiLog.scrollTop = aiLog.scrollHeight; // التمرير التلقائي لآخر رسالة
+            aiLog.scrollTop = aiLog.scrollHeight;
         }
 
-        // 5. فيزياء الجزيئات المتطورة بالخلفية
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        let particlesArray;
-        let canvasColor = 'rgba(56, 189, 248, 0.22)';
-
+        // فيزياء الجزيئات
+        const canvas = document.getElementById('particles-canvas'), ctx = canvas.getContext('2d');
+        let particlesArray, canvasColor = 'rgba(56, 189, 248, 0.22)';
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         let mouse = { x: null, y: null, radius: 130 };
         window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
 
         class Particle {
-            constructor(x, y, dx, dy, size) {
-                this.x = x; this.y = y; this.dx = dx; this.dy = dy; this.size = size;
-            }
-            draw() {
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = canvasColor; ctx.fill();
-            }
+            constructor(x, y, dx, dy, size) { this.x = x; this.y = y; this.dx = dx; this.dy = dy; this.size = size; }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); ctx.fillStyle = canvasColor; ctx.fill(); }
             update() {
                 let diffX = mouse.x - this.x; let diffY = mouse.y - this.y;
                 let dist = Math.sqrt(diffX*diffX + diffY*diffY);
-                if (dist < mouse.radius) {
-                    // فيزياء التنافر عند اقتراب الفأرة
-                    this.x -= (diffX / dist) * 4; this.y -= (diffY / dist) * 4;
-                } else {
+                if (dist < mouse.radius) { this.x -= (diffX / dist) * 4; this.y -= (diffY / dist) * 4; } 
+                else {
                     if (this.x > canvas.width || this.x < 0) this.dx = -this.dx;
                     if (this.y > canvas.height || this.y < 0) this.dy = -this.dy;
                     this.x += this.dx; this.y += this.dy;
@@ -528,23 +487,15 @@
                 this.draw();
             }
         }
-
         function init() {
-            particlesArray = [];
-            let num = (canvas.height * canvas.width) / 9000;
+            particlesArray = []; let num = (canvas.height * canvas.width) / 9000;
             for (let i = 0; i < num; i++) {
-                particlesArray.push(new Particle(
-                    Math.random() * innerWidth, Math.random() * innerHeight,
-                    (Math.random() * 0.4) - 0.2, (Math.random() * 0.4) - 0.2, (Math.random() * 2) + 1
-                ));
+                particlesArray.push(new Particle(Math.random() * innerWidth, Math.random() * innerHeight, (Math.random() * 0.4) - 0.2, (Math.random() * 0.4) - 0.2, (Math.random() * 2) + 1));
             }
         }
-
         function animate() {
-            requestAnimationFrame(animate);
-            ctx.clearRect(0,0,innerWidth, innerHeight);
+            requestAnimationFrame(animate); ctx.clearRect(0,0,innerWidth, innerHeight);
             for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update();
-            // خطوط الربط العصبي بين الجزيئات لمظهر سيبراني متكامل
             for (let a = 0; a < particlesArray.length; a++) {
                 for (let b = a; b < particlesArray.length; b++) {
                     let d = ((particlesArray[a].x - particlesArray[b].x)**2) + ((particlesArray[a].y - particlesArray[b].y)**2);
